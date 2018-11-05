@@ -312,8 +312,8 @@ sustantivo(["mujeres"],["women"],f,p).
 sustantivo(["palabra"],["word"],f,s).
 sustantivo(["palabras"],["words"],f,p).
 sustantivo(["mundo"],["world"],m,s).
-sustantivo(["aÃ±o"],["year"],m,s).
-sustantivo(["aÃ±os"],["years"],m,p).
+sustantivo(["año"],["year"],m,s).
+sustantivo(["años"],["years"],m,p).
 sustantivo(["libro"],["book"],m,s).
 sustantivo(["libros"],["books"],m,p).
 
