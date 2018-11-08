@@ -47,13 +47,16 @@ dem(["esas"],["those"],f,p).
 
 
 %Preguntas
-preg(["que"],["what"]).
-preg(["cual"],["which"]).
-preg(["como"],["how"]).
-preg(["donde"],["where"]).
-preg(["cuando"],["when"]).
-preg(["quien"],["who"]).
+question(["que"],["what"]).
+question(["cual"],["which"]).
+question(["como"],["how"]).
+question(["donde"],["where"]).
+question(["cuando"],["when"]).
+question(["quien"],["who"]).
 
+
+
+aux([" "],[" "]).
 
 
 

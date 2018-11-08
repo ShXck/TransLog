@@ -116,7 +116,7 @@ sustantivo(["cajas"],["boxes"],f,p).
 sustantivo(["nino"],["boy"],m,s).
 sustantivo(["ninos"],["boys"],m,p).
 sustantivo(["nina"],["girl"],f,s).
-sustantivo(["ni√±as"],["girls"],f,p).
+sustantivo(["niÒas"],["girls"],f,p).
 sustantivo(["edificio"],["building"],m,s).
 sustantivo(["edificios"],["buildings"],m,p).
 sustantivo(["negocio"],["business"],m,s).
@@ -124,6 +124,7 @@ sustantivo(["llamada"],["call"],f,s).
 sustantivo(["llamadas"],["calls"],f,p).
 sustantivo(["capital"],["capital"],f,s).
 sustantivo(["centro"],["center"],m,s).
+sustantivo(["comida"],["food"]),f,s).
 sustantivo(["siglo"],["century"],m,s).
 sustantivo(["siglos"],["centuries"],m,p).
 sustantivo(["oportunidad"],["chance"],f,s).
@@ -285,7 +286,7 @@ sustantivo(["ciencia"],["science"],f,s).
 sustantivo(["asiento"],["seat"],m,s).
 sustantivo(["segundo"],["second"],m,s).
 sustantivo(["segundos"],["seconds"],m,p).
-sustantivo(["se√±al"],["sign"],f,s).
+sustantivo(["seÒal"],["sign"],f,s).
 sustantivo(["hermana"],["sister"],f,s).
 sustantivo(["tama√±o"],["size"],m,s).
 sustantivo(["piel"],["skin"],f,s).

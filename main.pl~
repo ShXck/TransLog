@@ -1,18 +1,19 @@
 :- include("adjetives.pl").
 :- include("verbs.pl").
-:- include("verbs2.pl").
 :- include("nouns.pl").
 :- include("articles.pl").
 :- include("phrases.pl").
 
 /*Separa cada palabra del input en una lista para iniciar la traduccion correspondiente */
-transLogEI(X,R):-split_string(X," ", "", L),translateEI(L,I),atomic_list_concat(I, ' ', R).
-transLogIE(X,R):-split_string(X," ", "", L),translateIE(L,I),atomic_list_concat(I, ' ', R).
+/*UserInput: La frase de entrada.
+ * Result: La traduccion.*/
+transLogEI(UserInput,Result):-split_string(UserInput," ", "", SplitInput),translateEI(SplitInput,Translation),atomic_list_concat(Translation, ' ', Result).
+transLogIE(UserInput,Result):-split_string(UserInput," ", "", SplitInput),translateIE(SplitInput,Translation),atomic_list_concat(Translation, ' ', Result).
 
-transLogEI:-write("Introducir Texto en Español\n"),read(X),transLogEI(X,Y),write(Y).
+transLogEI:-write("Introduzca la frase en ESPAÑOL \n"),read(X),transLogEI(X,Y),write(Y).
 
 
-transLogIE:-write("Introduce your text in English\n"),read(X),transLogIE(X,Y),write(Y).
+transLogIE:-write("Introduce the phrase in ENGLISH \n"),read(X),transLogIE(X,Y),write(Y).
 
 translateIE(I,E):-expression(E,I).
 
@@ -31,7 +32,6 @@ translateIE(I,E,p):- predicate(I,E).
 
 /*Dada la persona gramatical y la cantidad busca el verbo que se ajuste a esas mismas condiciones*/
 translateIE(I,Ir,E,v,Person,Quantity):- verb(I,Ir,E,Person,Quantity),!.
-
 
 
 /* Articulo + sustantivo */
@@ -79,10 +79,7 @@ predicate([AdjEng|_],AdjEsp):- adjetivo(AdjEsp,[AdjEng],_,_),!.
 predicate([ConjEng|_],ConjEsp):- conj(ConjEsp,[ConjEng]),!.
 
 
-
-
-translateEI(E,I):- expression(E,I).
-
+translateEI(E,I):- expression(E,I),!.
 
 translateEI(E,I):- sintagma_nominal(E,Ers,NounEng,Person,Quantity,_),
 translateEI(Ers,Erv,VerbEng,v,Person,Quantity),
@@ -90,12 +87,20 @@ concatenate(NounEng,VerbEng,I0),
 translateEI(Erv,I1,p),
 concatenate(I0,I1,I).
 
+/*Traduce las oraciones palabra por palabra si no cumplen con las sintaxis definidas*/
+translateEI(E,I):-
+translate_by_word(E,[]).
+
+
+
+
+translateEI(E,I):-translate_word(E,I),!.
+
 translateEI([],[],_).
 
 translateEI(E,I,p):- predicado(E,I).
 
 /*Busca el verbo que se adapta de mejor manera al sujeto*/
-/*tradEI(I,Ir,Rv,v,Persona,Cant):- verb(I,Ir,Rv,Cant),!.%Oracion sin auxililar*/
 translateEI(E,Er,I,v,Person,Quantity):- sintagma_verbal(E,Er,I,Person,Quantity),!.
 
 
@@ -110,7 +115,6 @@ sintagma_nominal([ArticleEsp|[NounEsp|P]],P,E,t,Quantity,Gender):-
 sustantivo([NounEsp],NounEng,Gender,Quantity),
 articulo([ArticleEsp],ArticleEng,Gender,Quantity),
 concatenate(ArticleEng,NounEng,E),!.
-
 
 /*Pronombre*/
 sintagma_nominal([NounEsp|Ir],Ir,NounEng,Person,Quantity,_):- pronombre([NounEsp],NounEng,Person,Quantity,_),!.
@@ -127,12 +131,44 @@ predicado([Description2],Description2Eng),
 concatenate(Description1Eng,ConjEng,Result),
 concatenate(Result,Description2Eng,UnionResult),!.
 
-predicado([NounEsp|_],Si):- sustantivo([NounEsp],Si,_,_),!.
-predicado([AdjEsp|_],AdjEng):-adjetivo([AdjEsp],AdjEng,_,_),!.
-predicado([ConjEsp|_],ConjEng):-conj([ConjEsp],ConjEng),!.
+predicado([NounEsp,AdjEsp|_],Translation):-
+translate_word([NounEsp],NounEng),
+translate_word([AdjEsp],AdjEng),
+concatenate(AdjEng,NounEng,Translation).
+
+predicado([NounEsp|_],Si):- sustantivo([NounEsp],Si,_,_).
+predicado([AdjEsp|_],AdjEng):-adjetivo([AdjEsp],AdjEng,_,_).
+predicado([ConjEsp|_],ConjEng):-conj([ConjEsp],ConjEng).
+predicado([Word|_],Translation):-translate_word(Word,Translation).
+
 
 concatenate([],L,L).
 concatenate([X|L1],L2,[X|L3]):- concatenate(L1,L2,L3).
+
+reverse_list([],Result,Result).
+reverse_list([H|T],Result,Accumulator):-reverse_list(T,Result,[H|Accumulator]).
+
+translate_by_word([],L):-
+reverse_list(L,X,[]),
+atomic_list_concat(X, ' ', Result),
+write(Result).
+
+translate_by_word([H|T],TranslationList):-
+translate_word([H],Translation),
+concatenate(Translation,TranslationList,Result),
+translate_by_word(T,Result).
+
+
+
+translate_word(E,I):-
+infinitivo(E,I);
+verbo(E,I,_,_,_);
+adjetivo(E,I,_,_);
+articulo(E,I,_,_);
+conj(E,I);
+dem(E,I,_,_);
+question(E,I);
+sustantivo(E,I,_,_),!.
 
 
 

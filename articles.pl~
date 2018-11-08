@@ -30,29 +30,29 @@ conj(["de"],["of"]).
 
 
 %Demostrativos
-alg(["esto"],["this"],m,s).
-alg(["estos"],["this"],f,p).
-alg(["esta"],["these"],f,s).
-alg(["estas"],["these"],f,p).
+dem(["esto"],["this"],m,s).
+dem(["estos"],["this"],f,p).
+dem(["esta"],["these"],f,s).
+dem(["estas"],["these"],f,p).
 
 
 
 
-alg(["eso"],["that"],m,s).
-alg(["esos"],["those"],m,p).
-alg(["esa"],["that"],f,s).
-alg(["esas"],["those"],f,p).
+dem(["eso"],["that"],m,s).
+dem(["esos"],["those"],m,p).
+dem(["esa"],["that"],f,s).
+dem(["esas"],["those"],f,p).
 
 
 
 
 %Preguntas
-preg(["que"],["what"]).
-preg(["cual"],["which"]).
-preg(["como"],["how"]).
-preg(["donde"],["where"]).
-preg(["cuando"],["when"]).
-preg(["quien"],["who"]).
+question(["que"],["what"]).
+question(["cual"],["which"]).
+question(["como"],["how"]).
+question(["donde"],["where"]).
+question(["cuando"],["when"]).
+question(["quien"],["who"]).
 
 
 

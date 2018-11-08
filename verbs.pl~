@@ -206,7 +206,7 @@ auxInf("ganar",["win"]):-!.
 auxInf("trabajar",["work"]):-!.
 auxInf("escribir",["write"]):-!.
 auxInf("conocer",["know"]):-!.
-auxInf("manejar",["drive"]):-!.
+auxInf("manejar",["drive"]):-!
 
 verbo([""],["will"],p,s,f):-!.
 verbo([""],["will"],s,s,f):-!.
