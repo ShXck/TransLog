@@ -24,6 +24,10 @@ concatenate(NounEsp,VerbEsp,E0),
 translateIE(Irv,E1,p),
 concatenate(E0,E1,E).
 
+translateIE(I,E):-
+translate_by_word_IE(I,E),
+aux(["."],E).
+
 /*Condición de parada*/
 translateIE([],[],_).
 
@@ -32,7 +36,6 @@ translateIE(I,E,p):- predicate(I,E).
 
 /*Dada la persona gramatical y la cantidad busca el verbo que se ajuste a esas mismas condiciones*/
 translateIE(I,Ir,E,v,Person,Quantity):- verb(I,Ir,E,Person,Quantity),!.
-
 
 /* Articulo + sustantivo */
 subject([ArticleEng|[NounEng|P]],P,E,t,Quantity,Gender):-
@@ -89,10 +92,8 @@ concatenate(I0,I1,I).
 
 /*Traduce las oraciones palabra por palabra si no cumplen con las sintaxis definidas*/
 translateEI(E,I):-
-translate_by_word(E,[]).
-
-
-
+translate_by_word_EI(E,[]),
+aux(["."],I).
 
 translateEI(E,I):-translate_word(E,I),!.
 
@@ -148,16 +149,25 @@ concatenate([X|L1],L2,[X|L3]):- concatenate(L1,L2,L3).
 reverse_list([],Result,Result).
 reverse_list([H|T],Result,Accumulator):-reverse_list(T,Result,[H|Accumulator]).
 
-translate_by_word([],L):-
+translate_by_word_EI([],L):-
 reverse_list(L,X,[]),
 atomic_list_concat(X, ' ', Result),
 write(Result).
 
-translate_by_word([H|T],TranslationList):-
+translate_by_word_EI([H|T],TranslationList):-
 translate_word([H],Translation),
 concatenate(Translation,TranslationList,Result),
-translate_by_word(T,Result).
+translate_by_word_EI(T,Result).
 
+translate_by_word_IE([],L):-
+reverse_list(L,X,[]),
+atomic_list_concat(X,' ',Result),
+write(Result).
+
+translate_by_word_IE([H|T],TranslationList):-
+translate_word(Translation,[H]),
+concatenate(Translation,TranslationList,Result),
+translate_by_word_IE(T,Result).
 
 
 translate_word(E,I):-

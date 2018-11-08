@@ -55,8 +55,7 @@ question(["cuando"],["when"]).
 question(["quien"],["who"]).
 
 
-
-aux([" "],[" "]).
+aux(["."],["."]).
 
 
 

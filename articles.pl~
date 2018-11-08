@@ -56,6 +56,9 @@ question(["quien"],["who"]).
 
 
 
+aux([" "],[" "]).
+
+
 
 
 

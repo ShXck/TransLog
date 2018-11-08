@@ -317,4 +317,8 @@ sustantivo(["año"],["year"],m,s).
 sustantivo(["años"],["years"],m,p).
 sustantivo(["libro"],["book"],m,s).
 sustantivo(["libros"],["books"],m,p).
+sustantivo(["gato"],["cat"],m,s).
+sustantivo(["gatos"],["cats"],m,p).
+sustantivo(["gata"],["cat"],f,s).
+sustantivo(["gatas"],["cats"],f,p).
 

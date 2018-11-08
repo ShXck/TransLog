@@ -124,7 +124,7 @@ sustantivo(["llamada"],["call"],f,s).
 sustantivo(["llamadas"],["calls"],f,p).
 sustantivo(["capital"],["capital"],f,s).
 sustantivo(["centro"],["center"],m,s).
-sustantivo(["comida"],["food"]),f,s).
+sustantivo(["comida"],["food"],f,s).
 sustantivo(["siglo"],["century"],m,s).
 sustantivo(["siglos"],["centuries"],m,p).
 sustantivo(["oportunidad"],["chance"],f,s).
